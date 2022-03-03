@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/9660ac59-b440-499d-abd1-37a0c84c8a72/resourceGroups/resource-group-west/providers/Microsoft.Web/sites/udacity4",
+    "appService.deploySubpath": "."
+}
