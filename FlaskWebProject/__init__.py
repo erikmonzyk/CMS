@@ -12,7 +12,7 @@ app = Flask(__name__)
 app.config.from_object(Config)
 
 app.logger.setLevel(logging.WARNING) # DONE: Add any logging levels and handlers with app.logger
-logging.StreamHandler = logging.StreamHandler()
+StreamHandler = logging.StreamHandler()
 logging.StreamHandler.setLevel(logging.WARNING)
 app.logger.addHandler(streamHandler)
 
