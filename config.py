@@ -5,9 +5,9 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 class Config(object):
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'B.K7Q~bb7DJoj-i1vv1KCqIzF4aQSZmxTagkZ'
 
-    BLOB_ACCOUNT = os.environ.get('BLOB_ACCOUNT') or 'udacity1234'
-    BLOB_STORAGE_KEY = os.environ.get('BLOB_STORAGE_KEY') or '4nbPt0z4I3iZur2xqoNibqRm+iCmEwpslP9pxPcUZIZv+qEfmyWJEY5o5qlUXxr5CPexqrseVUjgrMU3uhsHXg=='
-    BLOB_CONTAINER = os.environ.get('BLOB_CONTAINER') or 'container2'
+    BLOB_ACCOUNT = os.environ.get('BLOB_ACCOUNT') or 'udacityimagesproject1'
+    BLOB_STORAGE_KEY = os.environ.get('BLOB_STORAGE_KEY') or 'smFV4lKG2wib8dWwlaf6s/Uauvfvj2mNhsBThA7D5ldUQn4/0dFmgKKHp888tswzKX4QoyyNl8Eb+ASt8BRAwQ=='
+    BLOB_CONTAINER = os.environ.get('BLOB_CONTAINER') or 'images'
 
     SQL_SERVER = os.environ.get('SQL_SERVER') or 'udacityserver1.database.windows.net'
     SQL_DATABASE = os.environ.get('SQL_DATABASE') or 'udacitydb'
