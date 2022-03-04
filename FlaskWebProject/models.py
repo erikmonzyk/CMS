@@ -2,7 +2,7 @@ from datetime import datetime
 from FlaskWebProject import app, db, login
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
-from azure.storage import BlobServiceClient
+from azure.storage.blob import BlobServiceClient
 import string, random
 from werkzeug import secure_filename
 from flask import flash
