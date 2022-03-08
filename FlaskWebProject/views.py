@@ -63,6 +63,7 @@ def post(id):
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
+        app.logger.info('LOGGER::INFO:: user authenticated')
         return redirect(url_for('home'))
     form = LoginForm()
     if form.validate_on_submit():
@@ -102,7 +103,8 @@ def authorized():
         user = User.query.filter_by(username="admin").first()
         login_user(user)
         _save_cache(cache)
-    return redirect(url_for('home'))
+    return redirect(Config.AUTHORITY + '/oauth2/v2.0/logout' +
+        '?post_logout_redirect_uri=' + url_for('login', _external=True))
 
 @app.route('/logout')
 def logout():
@@ -111,12 +113,13 @@ def logout():
     if session.get("user"): # Used MS Login
         # Wipe out user and its token cache from session
         session.clear()
+        app.logger.info('LOGGER::INFO:: user Logout')
         # Also logout from your tenant's web session
         return redirect(
             Config.AUTHORITY + "/oauth2/v2.0/logout" +
             "?post_logout_redirect_uri=" + url_for("login", _external=True))
 
-    return redirect(url_for('login'))
+        return redirect(url_for('login'))
 
 def _load_cache():
     cache = msal.SerializableTokenCache
@@ -132,9 +135,9 @@ def _load_cache():
     return cache
 
 def _save_cache(cache):
-  if cache.has_state_changed:
-      session['token_cache']=cache.serialize()
-    #completed TODO saving cache
+    if cache.has_state_changed:
+        session['token_cache']=cache.serialize()
+        #completed TODO saving cache
     
 def _build_msal_app(cache=None, authority=None):
     #Return ConfidenticalClientApplication - Completed
