@@ -3,7 +3,7 @@ import os
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 class Config(object):
-    SECRET_KEY = os.environ.get('SECRET_KEY') or 'B.K7Q~bb7DJoj-i1vv1KCqIzF4aQSZmxTagkZ'
+    SECRET_KEY = os.environ.get('SECRET_KEY') or 'secret-key'
 
     BLOB_ACCOUNT = os.environ.get('BLOB_ACCOUNT') or 'udacityimagesproject1'
     BLOB_STORAGE_KEY = os.environ.get('BLOB_STORAGE_KEY') or 'smFV4lKG2wib8dWwlaf6s/Uauvfvj2mNhsBThA7D5ldUQn4/0dFmgKKHp888tswzKX4QoyyNl8Eb+ASt8BRAwQ=='
@@ -30,9 +30,9 @@ class Config(object):
     AUTHORITY = "https://login.microsoftonline.com/common"  # For multi-tenant app, else put tenant name
     # AUTHORITY = "https://login.microsoftonline.com/Enter_the_Tenant_Name_Here"
 
-    CLIENT_ID = "cb774d97-da5f-4dcf-8296-54d26e2575b8"
+    CLIENT_ID = "56aeed41-c00d-4b7f-8b18-68c947be9178"
 
-    REDIRECT_PATH = "https://udacity4.azurewebsites.net/getAToken"  # Used to form an absolute URL; must match to app's redirect_uri set in AAD
+    REDIRECT_PATH = "/get_a_token"  # Used to form an absolute URL; must match to app's redirect_uri set in AAD
 
     # You can find the proper permission names from this document
     # https://docs.microsoft.com/en-us/graph/permissions-reference
