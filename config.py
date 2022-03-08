@@ -27,12 +27,12 @@ class Config(object):
     # if not CLIENT_SECRET:
     #     raise ValueError("Need to define CLIENT_SECRET environment variable")
 
-    #AUTHORITY = "https://login.microsoftonline.com/common"  # For multi-tenant app, else put tenant name
-    AUTHORITY = "https://login.microsoftonline.com/a201e542-ecba-4493-8b7b-9c0599e72400"
+    AUTHORITY = "https://login.microsoftonline.com/common"  # For multi-tenant app, else put tenant name
+    #AUTHORITY = "https://login.microsoftonline.com/a201e542-ecba-4493-8b7b-9c0599e72400"
 
     CLIENT_ID = "56aeed41-c00d-4b7f-8b18-68c947be9178"
 
-    REDIRECT_PATH = "/get_a_pile"  # Used to form an absolute URL; must match to app's redirect_uri set in AAD
+    REDIRECT_PATH = "/localhost:5000/get_a_token"  # Used to form an absolute URL; must match to app's redirect_uri set in AAD
 
     # You can find the proper permission names from this document
     # https://docs.microsoft.com/en-us/graph/permissions-reference
