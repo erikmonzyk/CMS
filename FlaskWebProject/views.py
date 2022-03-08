@@ -63,21 +63,23 @@ def post(id):
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
-        app.logger.info('LOGGER::INFO:: user authenticated')
+        #app.logger.info('LOGGER::INFO:: user authenticated')
         return redirect(url_for('home'))
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
         if user is None or not user.check_password(form.password.data):
-            app.logger.warning('Invalid username or password')
             flash('Invalid username or password')
+            app.logger.warning('Invalid username or password')
             return redirect(url_for('login'))
+        
         login_user(user, remember=form.remember_me.data)
-        app.logger.warning('Successful login')
         next_page = request.args.get('next')
         if not next_page or url_parse(next_page).netloc != '':
-            next_page = url_for('home')
+            next_page = url_for('home')t
+        app.logger.warning('Successful login')
         return redirect(next_page)
+    
     session["state"] = str(uuid.uuid4())
     auth_url = _build_auth_url(scopes=Config.SCOPE, state=session["state"])
     return render_template('login.html', title='Sign In', form=form, auth_url=auth_url)
@@ -103,17 +105,18 @@ def authorized():
         user = User.query.filter_by(username="admin").first()
         login_user(user)
         _save_cache(cache)
-    return redirect(Config.AUTHORITY + '/oauth2/v2.0/logout' +
-        '?post_logout_redirect_uri=' + url_for('login', _external=True))
+    return redirect(url_for('home'))
+    #return redirect(Config.AUTHORITY + '/oauth2/v2.0/logout' +
+        #'?post_logout_redirect_uri=' + url_for('login', _external=True))
 
 @app.route('/logout')
 def logout():
     logout_user()
-    app.logger.warning('Successful logout')
+    #app.logger.warning('Successful logout')
     if session.get("user"): # Used MS Login
         # Wipe out user and its token cache from session
         session.clear()
-        app.logger.info('LOGGER::INFO:: user Logout')
+        #app.logger.info('LOGGER::INFO:: user Logout')
         # Also logout from your tenant's web session
         return redirect(
             Config.AUTHORITY + "/oauth2/v2.0/logout" +
@@ -142,14 +145,13 @@ def _save_cache(cache):
 def _build_msal_app(cache=None, authority=None):
     #Return ConfidenticalClientApplication - Completed
     return msal.ConfidentialClientApplication(
-        Config.CLIENT_ID,authority=authority or Config.AUTHORITY, 
+        Config.CLIENT_ID, authority=authority or Config.AUTHORITY, 
         client_credential=Config.CLIENT_SECRET,token_cache=cache)
-    return None
-
+ 
 def _build_auth_url(authority=None, scopes=None, state=None):
     return _build_msal_app(authority=authority).get_authorization_request_url(
         scopes or [],
         state=state or str(uuid.uuid4()),
         redirect_uri=url_for('authorized',_external=True,_scheme='https'))
     # Completed TODO: Return the full Auth Request URL with appropriate Redirect URI
-    return None
+ 
