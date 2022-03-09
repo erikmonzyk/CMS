@@ -19,7 +19,7 @@ class Config(object):
 
     ### Info for MS Authentication ###
     ### As adapted from: https://github.com/Azure-Samples/ms-identity-python-webapp ###
-    CLIENT_SECRET = "9Dz7Q~EJP9.InGKtp-qqg2T8u16IrJEX.mm0Q"
+    CLIENT_SECRET = "B.K7Q~bb7DJoj-i1vv1KCqIzF4aQSZmxTagkZ"
     # In your production app, Microsoft recommends you to use other ways to store your secret,
     # such as KeyVault, or environment variable as described in Flask's documentation here:
     # https://flask.palletsprojects.com/en/1.1.x/config/#configuring-from-environment-variables
@@ -32,7 +32,7 @@ class Config(object):
 
     CLIENT_ID = "56aeed41-c00d-4b7f-8b18-68c947be9178"
 
-    REDIRECT_PATH = "/token"  # Used to form an absolute URL; must match to app's redirect_uri set in AAD
+    REDIRECT_PATH = "/get_a_token"  # Used to form an absolute URL; must match to app's redirect_uri set in AAD
 
     # You can find the proper permission names from this document
     # https://docs.microsoft.com/en-us/graph/permissions-reference
