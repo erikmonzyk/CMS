@@ -43,8 +43,7 @@ def new_post():
         imageSource=imageSourceUrl,
         form=form
     )
-
-
+    
 @app.route('/post/<int:id>', methods=['GET', 'POST'])
 @login_required
 def post(id):
@@ -72,14 +71,12 @@ def login():
             flash('Invalid username or password')
             app.logger.warning('Invalid username or password')
             return redirect(url_for('login'))
-        
         login_user(user, remember=form.remember_me.data)
         next_page = request.args.get('next')
         if not next_page or url_parse(next_page).netloc != '':
             next_page = url_for('home')
-        app.logger.warning('Successful login')
+            app.logger.warning('Successful login')
         return redirect(next_page)
-    
     session["state"] = str(uuid.uuid4())
     auth_url = _build_auth_url(scopes=Config.SCOPE, state=session["state"])
     return render_template('login.html', title='Sign In', form=form, auth_url=auth_url)
@@ -96,7 +93,6 @@ def authorized():
         #result = None
         result = _build_msal_app(cache=cache).acquire_token_by_authorization_code(
                 request.args['code'],scopes=Config.SCOPE, redirect_uri=url_for('authorized', _external=True, _scheme='https'))
- 
         if "error" in result:
             return render_template("auth_error.html", result=result)
         session["user"] = result.get("id_token_claims")
@@ -105,9 +101,8 @@ def authorized():
         user = User.query.filter_by(username="admin").first()
         login_user(user)
         _save_cache(cache)
+        
     return redirect(url_for('home'))
-    #return redirect(Config.AUTHORITY + '/oauth2/v2.0/logout' +
-        #'?post_logout_redirect_uri=' + url_for('login', _external=True))
 
 @app.route('/logout')
 def logout():
@@ -122,25 +117,18 @@ def logout():
             Config.AUTHORITY + "/oauth2/v2.0/logout" +
             "?post_logout_redirect_uri=" + url_for("login", _external=True))
 
-        return redirect(url_for('login'))
+    return redirect(url_for('login'))
 
 def _load_cache():
     cache = msal.SerializableTokenCache
     if session.get('token_cache'):
         cache.deserialize(session['token_cache'])
-    #original if statement checking on cache
-    #if request.args.get('code'):
-        #cache = _load_cache()
-        #result = _build_msal_app(cache=cache).acquire_token_by_authorization_code(
-        #        request.args['code'],scopes=Config.SCOPE, redirect_uri=url_for('authorized', _external=True, _scheme='https'))
-    # TODO: Load the cache from `msal`, if it exists
-    #cache = None
     return cache
 
 def _save_cache(cache):
     if cache.has_state_changed:
         session['token_cache']=cache.serialize()
-        #completed TODO saving cache
+    return cache
     
 def _build_msal_app(cache=None, authority=None):
     #Return ConfidenticalClientApplication - Completed
@@ -153,5 +141,4 @@ def _build_auth_url(authority=None, scopes=None, state=None):
         scopes or [],
         state=state or str(uuid.uuid4()),
         redirect_uri=url_for('authorized',_external=True,_scheme='https'))
-    # Completed TODO: Return the full Auth Request URL with appropriate Redirect URI
- 
+  
