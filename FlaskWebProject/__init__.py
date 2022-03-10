@@ -1,3 +1,7 @@
+"""
+The flask application package.
+"""
+#from asyncio import streams
 import logging
 from flask import Flask
 from config import Config
