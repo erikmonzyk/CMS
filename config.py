@@ -9,14 +9,14 @@ class Config(object):
     BLOB_STORAGE_KEY = os.environ.get('BLOB_STORAGE_KEY') or 'smFV4lKG2wib8dWwlaf6s/Uauvfvj2mNhsBThA7D5ldUQn4/0dFmgKKHp888tswzKX4QoyyNl8Eb+ASt8BRAwQ=='
     BLOB_CONTAINER = os.environ.get('BLOB_CONTAINER') or 'images'
 
-    SQL_SERVER = os.environ.get('SQL_SERVER') or 'udacityserver.database.windows.net'
+    SQL_SERVER = os.environ.get('SQL_SERVER') or 'udacityserver1.database.windows.net'
     SQL_DATABASE = os.environ.get('SQL_DATABASE') or 'udacitydb'
     SQL_USER_NAME = os.environ.get('SQL_USER_NAME') or 'serveradmin'
     SQL_PASSWORD = os.environ.get('SQL_PASSWORD') or 'Robert1980'
     # Below URI may need some adjustments for driver version, based on your OS, if running locally
     SQLALCHEMY_DATABASE_URI = 'mssql+pyodbc://' + SQL_USER_NAME + '@' + SQL_SERVER + ':' + SQL_PASSWORD + '@' + SQL_SERVER + ':1433/' + SQL_DATABASE  + '?driver=ODBC+Driver+18+for+SQL+Server'
-    # different database connect format 
-    #SQLALCHEMY_DATABASE_URI = 'mssql+pyodbc://' + SQL_USER_NAME + ':' + SQL_PASSWORD + '@' + SQL_SERVER + ':5555/' + SQL_DATABASE  + '?driver=ODBC+Driver+18+for+SQL+Server'
+    # different database connect format
+    #SQLALCHEMY_DATABASE_URI = 'mssql+pyodbc://' + SQL_USER_NAME + ':' + SQL_PASSWORD + '@' + SQL_SERVER + ':1433/' + SQL_DATABASE  + '?driver=ODBC+Driver+18+for+SQL+Server'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     
     ### Info for MS Authentication ###
