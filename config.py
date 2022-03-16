@@ -13,8 +13,11 @@ class Config(object):
     SQL_DATABASE = os.environ.get('SQL_DATABASE') or 'udacitydb'
     SQL_USER_NAME = os.environ.get('SQL_USER_NAME') or 'serveradmin'
     SQL_PASSWORD = os.environ.get('SQL_PASSWORD') or 'Robert1980'
+    #Connection_Timeout = os.environ.get ('Connection_Timeout') or '60'
+    
     # Below URI may need some adjustments for driver version, based on your OS, if running locally
-    SQLALCHEMY_DATABASE_URI = 'mssql+pyodbc://' + SQL_USER_NAME + '@' + SQL_SERVER + ':' + SQL_PASSWORD + '@' + SQL_SERVER + ':1433/' + SQL_DATABASE  + '?driver=ODBC+Driver+18+for+SQL+Server'
+    SQLALCHEMY_DATABASE_URI = 'mssql+pyodbc://' + SQL_USER_NAME + '@' + SQL_SERVER + ':' + SQL_PASSWORD + '@' + SQL_SERVER + ':1433/' + SQL_DATABASE  + '?driver=ODBC+Driver+18+for+SQL+Server' 
+    #+ Connection_Timeout
     # different database connect format
     #SQLALCHEMY_DATABASE_URI = 'mssql+pyodbc://' + SQL_USER_NAME + ':' + SQL_PASSWORD + '@' + SQL_SERVER + ':1433/' + SQL_DATABASE  + '?driver=ODBC+Driver+18+for+SQL+Server'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
